@@ -1,0 +1,10 @@
+{
+  "titleTasks": "My Tasks",
+  "description": "Description",
+  "addNewTask": "Add New Task",
+  "updateTask": "Update Task",
+  "addTitle": "Add title",
+  "addTask": "Add Task",
+  "deleteTask": "Delete task",
+  "taskDeleted": "Deleting a task"
+}

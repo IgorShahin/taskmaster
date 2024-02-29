@@ -1,0 +1,18 @@
+{
+  "titleApp": "Задачи",
+  "titleAuthentication": "Вход",
+  "loginButtonText": "Войти",
+  "signInButtonText": "Войти в приложение",
+  "registerButtonText": "Зарегистрироваться",
+  "delete": "Удалить",
+  "textPassword": "пароль",
+  "hintLogin": "логин",
+  "titleTasks": "Задачи",
+  "description": "Описание",
+  "addNewTask": "Добавить новую задачу",
+  "updateTask": "Обновить задачу",
+  "addTitle": "Добавить заголовок",
+  "addTask": "Добавить задачу",
+  "deleteTask": "Удалить задачу",
+  "taskDeleted": "Удаление задачи"
+}
