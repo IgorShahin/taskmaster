@@ -10,5 +10,7 @@
   "textPassword": "password",
   "hintLogin": "login",
   "titleAuthentication": "Login Form",
-  "loginButtonText": "Login"
+  "loginButtonText": "Login",
+  "infoCompleted": "{completed} of {taskLength} task",
+  "allTasksCompletedMessage": "You Have Done All Tasks!"
 }
