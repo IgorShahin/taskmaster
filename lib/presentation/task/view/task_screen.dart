@@ -31,41 +31,45 @@ class TaskScreen extends StatelessWidget {
                 child: BlocBuilder<TaskBloc, TaskState>(
                   builder: (context, state) {
                     if (state is TaskDoneState) {
-                      return ListView.builder(
-                        itemCount: state.tasks?.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          final task = state.tasks![index];
-                          return TaskCard(
-                            onDismissed: (direction) =>
-                                BlocProvider.of<TaskBloc>(context)
-                                    .add(RemoveTasksEvent(task.id!)),
-                            onTapStatus: () =>
-                                BlocProvider.of<TaskBloc>(context).add(
-                                    UpdateTasksEvent(task.copyWith(
-                                        isCompleted: !task.isCompleted!))),
-                            onTapCard: () =>
-                                context.router.push(TaskItemRoute(task: task)),
-                            task: task,
-                          );
-                        },
-                      );
+                      return state.tasks!.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: state.tasks?.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                final task = state.tasks![index];
+                                return TaskCard(
+                                  onDismissed: (direction) =>
+                                      BlocProvider.of<TaskBloc>(context)
+                                          .add(RemoveTasksEvent(task.id!)),
+                                  onTapStatus: () =>
+                                      BlocProvider.of<TaskBloc>(context).add(
+                                          UpdateTasksEvent(task.copyWith(
+                                              isCompleted:
+                                                  !task.isCompleted!))),
+                                  onTapCard: () => context.router
+                                      .push(TaskItemRoute(task: task)),
+                                  task: task,
+                                );
+                              },
+                            )
+                          : Column(
+                              children: [
+                                Image.asset(
+                                  AppAssets.iconTaskEmpty,
+                                  width: 300,
+                                  height: 300,
+                                ),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  "You Have Done All Tasks!",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            );
                     }
-                    return Column(
-                      children: [
-                        Image.asset(
-                          AppAssets.iconTaskEmpty,
-                          width: 300,
-                          height: 300,
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "You Have Done All Tasks!",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    );
+                    return Container();
                   },
                 ),
               )
