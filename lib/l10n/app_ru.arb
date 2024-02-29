@@ -12,5 +12,7 @@
   "deleteTask": "Удалить задачу",
   "taskDeleted": "Удаление задачи",
   "infoCompleted": "{completed} из {taskLength} задач",
-  "allTasksCompletedMessage": "Вы выполнили все задания!"
+  "allTasksCompletedMessage": "Вы выполнили все задания!",
+  "all": "Все",
+  "completed": "Выполненные"
 }

@@ -12,5 +12,7 @@
   "titleAuthentication": "Login Form",
   "loginButtonText": "Login",
   "infoCompleted": "{completed} of {taskLength} task",
-  "allTasksCompletedMessage": "You Have Done All Tasks!"
+  "allTasksCompletedMessage": "You Have Done All Tasks!",
+  "all": "All",
+  "completed": "Completed"
 }
