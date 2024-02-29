@@ -6,5 +6,9 @@
   "addTitle": "Add title",
   "addTask": "Add Task",
   "deleteTask": "Delete task",
-  "taskDeleted": "Deleting a task"
+  "taskDeleted": "Deleting a task",
+  "textPassword": "password",
+  "hintLogin": "login",
+  "titleAuthentication": "Login Form",
+  "loginButtonText": "Login"
 }

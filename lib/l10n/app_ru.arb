@@ -1,10 +1,6 @@
 {
-  "titleApp": "Задачи",
   "titleAuthentication": "Вход",
-  "loginButtonText": "Войти",
-  "signInButtonText": "Войти в приложение",
-  "registerButtonText": "Зарегистрироваться",
-  "delete": "Удалить",
+  "loginButtonText": "Вход",
   "textPassword": "пароль",
   "hintLogin": "логин",
   "titleTasks": "Задачи",
