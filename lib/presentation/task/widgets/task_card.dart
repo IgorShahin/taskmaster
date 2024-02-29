@@ -106,7 +106,8 @@ class TaskCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          DateFormat.yMMMEd().format(task!.createdAtDate!),
+                          DateFormat.yMMMEd(context.l10n.localeName)
+                              .format(task!.createdAtDate!),
                           style: TextStyle(
                             fontSize: 14,
                             color:

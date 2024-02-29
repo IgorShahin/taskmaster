@@ -18,6 +18,10 @@ class AddTasksEvent extends TaskEvent {
   const AddTasksEvent(Task task) : super(task: task);
 }
 
+class FilterTaskEvent extends TaskEvent {
+  const FilterTaskEvent();
+}
+
 class RemoveTasksEvent extends TaskEvent {
   const RemoveTasksEvent(String idTask) : super(idTask: idTask);
 }

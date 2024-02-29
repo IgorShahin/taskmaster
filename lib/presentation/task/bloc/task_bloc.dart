@@ -8,6 +8,7 @@ import '../../../domain/usecase/uc_get_all_tasks.dart';
 import '../../../domain/usecase/uc_update_task.dart';
 
 part 'task_event.dart';
+
 part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
@@ -26,6 +27,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<AddTasksEvent>(onAddTasks);
     on<RemoveTasksEvent>(onRemoveTasks);
     on<UpdateTasksEvent>(onUpdateTasks);
+    on<FilterTaskEvent>(onFilterTasks);
   }
 
   void onGetAllTasks(GetAllTasksEvent event, Emitter<TaskState> emit) async {
@@ -50,5 +52,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     await _ucUpdateTask(params: task.task);
     final tasks = await _ucGetAllTask();
     emit(TaskDoneState(tasks));
+  }
+
+  void onFilterTasks(FilterTaskEvent task, Emitter<TaskState> emit) async {
+    final tasks = await _ucGetAllTask();
+    emit(TaskDoneState(
+        tasks.where((task) => task.isCompleted == true).toList()));
   }
 }
