@@ -3,11 +3,11 @@ import 'package:taskmaster/domain/repositories/user_repository.dart';
 
 import '../entities/user.dart';
 
-class UcAddToken extends UseCase<void, User> {
+class UcClearToken extends UseCase<void, User> {
   final UserRepository _userRepository;
 
-  UcAddToken(this._userRepository);
+  UcClearToken(this._userRepository);
 
   @override
-  Future<void> call({User? params}) => _userRepository.addToken(params!);
+  Future<void> call({User? params}) => _userRepository.clearToken(params!);
 }

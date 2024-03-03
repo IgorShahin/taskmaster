@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../domain/entities/user.dart';
 
@@ -10,10 +9,9 @@ class UserModel {
   @HiveField(0)
   final String? token;
 
-  UserModel({required this.token});
+  UserModel({this.token});
 
-  factory UserModel.fromEntity(User user) =>
-      UserModel(token: user.token ?? const Uuid().v1());
+  factory UserModel.fromEntity(User user) => UserModel(token: user.token ?? '');
 
-  User toEntity() => User(token: token);
+  User toEntity() => User(token: token ?? '');
 }

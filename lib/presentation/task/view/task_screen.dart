@@ -18,11 +18,33 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var filterValue = context.l10n.all;
-    return BlocProvider<TaskBloc>(
-      create: (context) => sl()..add(const GetAllTasksEvent()),
-      child: Scaffold(
-        appBar: buildAppBar(context),
-        body: SizedBox(
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: BlocProvider<TaskBloc>(
+              create: (context) => sl()..add(const ClearTokenEvent()),
+              child: Builder(builder: (context) {
+                return IconButton(
+                  onPressed: () {
+                    context.read<TaskBloc>().add(const ClearTokenEvent());
+                    context.router.push(const LoginRoute());
+                  },
+                  icon: const Icon(
+                    Icons.exit_to_app,
+                    size: 32,
+                  ),
+                );
+              }),
+            ),
+          )
+        ],
+      ),
+      body: BlocProvider<TaskBloc>(
+        create: (context) => sl()..add(const GetAllTasksEvent()),
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: BlocBuilder<TaskBloc, TaskState>(
@@ -120,32 +142,12 @@ class TaskScreen extends StatelessWidget {
             },
           ),
         ),
-        floatingActionButton: Builder(
-            builder: (context) => FloatingActionButton(
-                  onPressed: () => context.router.push(TaskItemRoute()),
-                  child: const Icon(Icons.add),
-                )),
       ),
-    );
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16),
-          child: IconButton(
-            onPressed: () {
-              context.router.push(const LoginRoute());
-            },
-            icon: const Icon(
-              Icons.exit_to_app,
-              size: 32,
-            ),
-          ),
-        )
-      ],
+      floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+                onPressed: () => context.router.push(TaskItemRoute()),
+                child: const Icon(Icons.add),
+              )),
     );
   }
 }

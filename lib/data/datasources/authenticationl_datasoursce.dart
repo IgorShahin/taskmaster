@@ -7,15 +7,15 @@ class AuthenticationDataSource {
 
   AuthenticationDataSource(this.authenticationBox);
 
-  void addUser(UserModel user) {
-    authenticationBox.put(user.token, user);
+  void addToken(UserModel user) {
+    authenticationBox.putAt(0, user);
   }
 
-  UserModel getToken() {
+  UserModel getUser() {
     return authenticationBox.values.first;
   }
 
-  void deleteToken(String token) {
-    authenticationBox.delete(token);
+  void clearToken(UserModel user) {
+    authenticationBox.putAt(0, user);
   }
 }

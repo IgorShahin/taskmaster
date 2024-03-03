@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:taskmaster/data/model/task_model.dart';
+import 'package:taskmaster/data/model/user_model.dart';
 
 import '../config/resources/app_theme.dart';
 import '../config/routes/router.dart';
@@ -39,6 +40,7 @@ class AppRoot extends StatelessWidget with WidgetsBindingObserver {
     WidgetsFlutterBinding.ensureInitialized();
     await Hive.initFlutter();
     Hive.registerAdapter(TaskModelAdapter());
+    Hive.registerAdapter(UserModelAdapter());
     await initializeDependencies();
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));

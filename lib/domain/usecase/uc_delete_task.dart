@@ -8,7 +8,5 @@ class UcDeleteTask extends UseCase<void, String> {
   UcDeleteTask(this._taskRepository);
 
   @override
-  Future<void> call({String? params}) {
-    return _taskRepository.deleteTask(params!);
-  }
+  Future<void> call({String? params}) => _taskRepository.deleteTask(params!);
 }

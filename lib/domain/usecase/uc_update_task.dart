@@ -9,7 +9,5 @@ class UcUpdateTask extends UseCase<void, Task> {
   UcUpdateTask(this._taskRepository);
 
   @override
-  Future<void> call({Task? params}) {
-    return _taskRepository.updateTask(params!);
-  }
+  Future<void> call({Task? params}) => _taskRepository.updateTask(params!);
 }

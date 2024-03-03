@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskmaster/presentation/login/bloc/login_bloc.dart';
+import 'package:taskmaster/presentation/home/bloc/home_bloc.dart';
 
 import '../../../config/routes/router.dart';
 import '../../../injection_container.dart';
@@ -12,18 +12,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LoginBloc>(
+    return BlocProvider<HomeBloc>(
       create: (context) => sl()..add(const GetTokenEvent()),
-      child: BlocBuilder<LoginBloc, LoginState>(
+      child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return AutoTabsRouter(
             routes: [
-              if (state.user == null) ...{
+              if (state is SuccessfulLoginState) ...{
                 const TaskRoute(),
-                const LoginRoute(),
               } else ...{
                 const LoginRoute(),
-                const TaskRoute(),
               }
             ],
             builder: (context, child) {

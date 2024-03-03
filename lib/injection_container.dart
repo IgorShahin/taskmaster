@@ -2,9 +2,10 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:taskmaster/data/datasources/authenticationl_datasoursce.dart';
 import 'package:taskmaster/domain/repositories/user_repository.dart';
-import 'package:taskmaster/domain/usecase/uc_delete_token.dart';
-import 'package:taskmaster/domain/usecase/uc_get_token.dart';
+import 'package:taskmaster/domain/usecase/uc_clear_token.dart';
+import 'package:taskmaster/domain/usecase/uc_get_user.dart';
 import 'package:taskmaster/domain/usecase/uc_update_task.dart';
+import 'package:taskmaster/presentation/home/bloc/home_bloc.dart';
 import 'package:taskmaster/presentation/login/bloc/login_bloc.dart';
 import 'package:taskmaster/presentation/task/bloc/task_bloc.dart';
 
@@ -25,6 +26,9 @@ Future<void> initializeDependencies() async {
   final taskBox = await Hive.openBox<TaskModel>('tasks');
 
   final userBox = await Hive.openBox<UserModel>('user');
+  if (userBox.isEmpty) {
+    userBox.add(UserModel());
+  }
 
   // Dependencies
   sl.registerSingleton<TaskDataSource>(TaskDataSource(taskBox));
@@ -39,20 +43,29 @@ Future<void> initializeDependencies() async {
   // UseCases
   sl.registerSingleton<UcAddTask>(UcAddTask(sl()));
 
-  sl.registerSingleton<UcAddUser>(UcAddUser(sl()));
+  sl.registerSingleton<UcAddToken>(UcAddToken(sl()));
 
   sl.registerSingleton<UcDeleteTask>(UcDeleteTask(sl()));
 
-  sl.registerSingleton<UcDeleteToken>(UcDeleteToken(sl()));
+  sl.registerSingleton<UcClearToken>(UcClearToken(sl()));
 
   sl.registerSingleton<UcGetAllTask>(UcGetAllTask(sl()));
 
-  sl.registerSingleton<UcGetToken>(UcGetToken(sl()));
+  sl.registerSingleton<UcGetUser>(UcGetUser(sl()));
 
   sl.registerSingleton<UcUpdateTask>(UcUpdateTask(sl()));
 
   // Blocks
-  sl.registerFactory<TaskBloc>(() => TaskBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory<TaskBloc>(() => TaskBloc(
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+      ));
 
-  sl.registerFactory<LoginBloc>(() => LoginBloc(sl(), sl(), sl()));
+  sl.registerFactory<LoginBloc>(() => LoginBloc(sl(), sl()));
+
+  sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));
 }

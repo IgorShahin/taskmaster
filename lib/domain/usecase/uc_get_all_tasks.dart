@@ -9,7 +9,5 @@ class UcGetAllTask extends UseCase<List<Task>, void> {
   UcGetAllTask(this._taskRepository);
 
   @override
-  Future<List<Task>> call({void params}) {
-    return _taskRepository.getAllTasks();
-  }
+  Future<List<Task>> call({void params}) => _taskRepository.getAllTasks();
 }

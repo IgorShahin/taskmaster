@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:taskmaster/core/extensions.dart';
 
 import '../../../config/resources/app_colors.dart';
+import '../../../domain/entities/task.dart';
 
 class MainTitleAppBar extends StatelessWidget {
   const MainTitleAppBar({
     super.key,
+    this.task,
   });
+
+  final List<Task>? task;
 
   @override
   Widget build(BuildContext context) {
+    final completed = task != null && task!.isNotEmpty
+        ? task!.where((task) => task.isCompleted == true).toList().length
+        : 0;
     return Column(
       children: [
         Container(
@@ -19,18 +26,15 @@ class MainTitleAppBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Progress indicator
-              const SizedBox(
+              SizedBox(
                   width: 30,
                   height: 30,
                   child: CircularProgressIndicator(
-                    value: 1 / 3,
+                    value: task!.isNotEmpty ? completed / task!.length : 0,
                     backgroundColor: Colors.grey,
-                    valueColor: AlwaysStoppedAnimation(AppColors.primary),
+                    valueColor: const AlwaysStoppedAnimation(AppColors.primary),
                   )),
               const SizedBox(width: 25),
-
-              // Top lvl Task Info
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +45,7 @@ class MainTitleAppBar extends StatelessWidget {
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    "1 of 3 task",
+                    context.l10n.infoCompleted(completed, task!.length),
                     style: context.textTheme.titleMedium,
                   )
                 ],

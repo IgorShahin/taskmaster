@@ -1,9 +1,9 @@
 import '../entities/user.dart';
 
 abstract class UserRepository {
-  Future<void> addUser(User user);
+  Future<void> addToken(User user);
 
-  Future<User> getToken();
+  Future<User> getUser();
 
-  Future<void> deleteToken(String token);
+  Future<void> clearToken(User user);
 }

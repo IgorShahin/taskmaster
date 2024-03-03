@@ -10,18 +10,19 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl(this.authenticationDataSource);
 
   @override
-  Future<void> addUser(User user) async {
+  Future<void> addToken(User user) async {
     final userModel = UserModel.fromEntity(user);
-    authenticationDataSource.addUser(userModel);
+    authenticationDataSource.addToken(userModel);
   }
 
   @override
-  Future<void> deleteToken(String token) async {
-    authenticationDataSource.deleteToken(token);
+  Future<void> clearToken(User user) async {
+    final userModel = UserModel.fromEntity(user);
+    authenticationDataSource.clearToken(userModel);
   }
 
   @override
-  Future<User> getToken() async {
-    return authenticationDataSource.getToken().toEntity();
+  Future<User> getUser() async {
+    return authenticationDataSource.getUser().toEntity();
   }
 }
